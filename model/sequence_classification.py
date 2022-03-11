@@ -385,7 +385,7 @@ class RobertaPrefixForSequenceClassification(RobertaPreTrainedModel):
 
         batch_size = input_ids.shape[0]
         past_key_values = self.get_prompt(batch_size=batch_size)
-        prefix_attention_mask = torch.ones(batch_size, self.pre_seq_len).to(self.roberta.device)
+        prefix_attention_mask = torch.ones(batch_size, self.pre_seq_len,dtype=torch.int64).to(self.roberta.device)
         attention_mask = torch.cat((prefix_attention_mask, attention_mask), dim=1)
 
         outputs = self.roberta(
